@@ -71,3 +71,35 @@ CREATE TABLE "GDOC_RECIBIDO" (
 
 ALTER TABLE "GDOC_RECIBIDO" ADD CONSTRAINT "GDOC_RECIBIDO_FK1" FOREIGN KEY ("ID_CATEGORIA") 
 REFERENCES "GDOC_CATEGORIA" ("ID") MATCH FULL;
+
+INSERT INTO "GDOC_CATEGORIA"(
+            "NOMBRE", "DESCRIPCION")
+    VALUES ('MEMORANDO', 'Documento interno para comunicar en forma breve asuntos de carácter administrativo a personas');
+
+    INSERT INTO public."GDOC_CATEGORIA"(
+             "NOMBRE", "DESCRIPCION")
+    VALUES ('PQR', 'Peticiones, Quejas o recursos');
+
+    INSERT INTO public."GDOC_CATEGORIA"(
+             "NOMBRE", "DESCRIPCION")
+    VALUES ('Notificacion', 'Informacion que se brinda a persona o entidad interna o externa');
+
+    INSERT INTO public."GDOC_DEPENDENCIA"(
+            "CODIGO", "DESCRIPCION")
+    VALUES ('Recursos Humanos', 'Encargada de la gestión del personal');
+
+INSERT INTO public."GDOC_DEPENDENCIA"(
+            "CODIGO", "DESCRIPCION")
+    VALUES ('Administracion', 'Encargada de la toma de desiciones');
+
+INSERT INTO public."GDOC_PERSONA_JURIDICA"(
+            "NIT", "NOMBRE")
+    VALUES ('12345678', 'GDOC S.A');
+
+INSERT INTO public."GDOC_PERSONA_NATURAL"(
+            "TIPO_IDENTIFICACION", "IDENTIFICACION", "NOMBRES")
+    VALUES ('CC', '1234567890', 'PEPITO PEREZ');
+
+INSERT INTO public."GDOC_RUTA"(
+            "DESCRIPCION")
+    VALUES ('Atención PQR');

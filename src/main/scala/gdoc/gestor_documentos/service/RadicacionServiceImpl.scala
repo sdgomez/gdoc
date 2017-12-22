@@ -6,11 +6,11 @@ import scala.concurrent.Future
 
 trait RadicacionServiceImpl extends RadicacionService[Interno[_], Externo, Recibido[_, _]]{
   override def radicarInterno(interno: Interno[_]):Interno[_] = {
-
-    // falta versionarlo
-    // falta REALIZAR LOS INSERT INICIALES EN LA BD
+    // agregar slick
+    // mapping de las tablas
     // falta la parte del repository
     // falta los servicios rest
+    // falta las pruebas unitarias
     Interno(
       None,
       Categoria(None, "Memorando", ""),
