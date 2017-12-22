@@ -1,0 +1,75 @@
+Radicar documento:
+
+un documento puede ser de tipo:
+ recibido
+ externo
+ interno
+
+ los puedo restringir por tipo.
+
+ Un documento tiene un remitente y un destinatario.
+
+
+Remitente
+
+	if documento.isInterno
+		- usuario del sistema (persona natural que pertenece a la empresa)
+	if documento.isExterno
+		- persona natural o jurídica, previamente almacenada como Entidad
+	if documento.isRecibido
+		-Usuario o Dependencia
+
+Destinatario
+	if documento.isInterno
+		- usuario, dependencia o ruta
+	if documento.isExterno
+		- persona, natural o jurídica, previamente creada como entidad
+	if documento.isRecibido
+		- usuario, dependencia o ruta
+
+
+En una radicación, la ruta nunca es remitente
+si es interno, es un usuario del sistema
+si es externo, persona natural o jurídica, previamente almacenada como Entidad
+y si es externo, es un usuario del sistema
+Usuario o Dependencia
+
+
+Y el destinatario
+Si es interno o Recibido, es un usuario, dependencia o ruta
+si es Externo, una persona, natural o jurídica, previamente creada como entidad
+
+
+
+persona
+persona natural
+persona juridica
+
+ruta
+
+
+modulo de radicación
+modulo de adjuntar archivo
+modulo de workflow (con indices dinamicos)
+modulo de firmar documento
+modulo de enviar documento a destinatario
+modulo de historico de destinatario
+modulo de historico de workflow
+bandeja de radicacion
+bandeja de destinatario
+bandeja de workflow
+modulo de procesos masivos
+modulo de archivo de gestion
+modulo de archivo central
+modulo de reportes
+modulo de relacionar documentos
+
+
+
+documento:
+
+consecutivo,
+remitente,
+destinatario,
+categoria,
+comentario.
