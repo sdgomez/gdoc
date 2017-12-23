@@ -9,7 +9,6 @@ trait RadicacionServiceImpl extends RadicacionService[Interno[DestinatarioGestio
   override def radicarInterno(interno: Interno[DestinatarioGestion]):Future[Interno[DestinatarioGestion]] = {
     // pool de conexiones
     // encriptar las contraseñas
-    // mapping de las tablas
     // falta la parte del repository
     // falta los servicios rest
     // falta las pruebas unitarias
