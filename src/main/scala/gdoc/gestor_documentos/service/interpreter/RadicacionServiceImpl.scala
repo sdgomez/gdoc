@@ -1,6 +1,7 @@
-package gdoc.gestor_documentos.service
+package gdoc.gestor_documentos.service.interpreter
 
 import gdoc.gestor_documentos.model._
+import gdoc.gestor_documentos.service.RadicacionService
 
 import scala.concurrent.Future
 
