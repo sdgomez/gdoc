@@ -6,7 +6,7 @@ import slick.jdbc.JdbcProfile
 object CategoriaTable extends JdbcProfile{
   import api._
 
-  class CategoriaMapa(tag: Tag) extends Table[Categoria](tag, "GDOC_CATEGORIA") {
+  private[persistence] class CategoriaMapa(tag: Tag) extends Table[Categoria](tag, "GDOC_CATEGORIA") {
     def id = column[Option[Long]]("ID", O.PrimaryKey)
 
     def nombre = column[String]("NOMBRE")
