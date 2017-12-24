@@ -1,12 +1,12 @@
 package gdoc.gestor_documentos.persistence.mapping
 
 import slick.jdbc.JdbcProfile
-import gdoc.gestor_documentos.model.Dependencia
+import gdoc.gestor_documentos.model.{Dependencia, MapaTabla}
 
 object DependenciaTable extends JdbcProfile{
   import api._
 
-  class DependenciaMapa(tag: Tag) extends Table[Dependencia](tag, "GDOC_DEPENDENCIA") {
+  class DependenciaMapa(tag: Tag) extends Table[Dependencia](tag, "GDOC_DEPENDENCIA") with MapaTabla{
     def id = column[Option[Long]]("ID", O.PrimaryKey)
 
     def codigo = column[String]("CODIGO")
@@ -16,5 +16,6 @@ object DependenciaTable extends JdbcProfile{
     def * = (id, codigo, descripcion) <> (Dependencia.tupled, Dependencia.unapply)
   }
 
-  val dependencia = TableQuery[DependenciaMapa]
+  val dependenciaTableQuery = TableQuery[DependenciaMapa]
+
 }

@@ -16,5 +16,5 @@ object CategoriaTable extends JdbcProfile{
     def * = (id, nombre, descripcion) <> (Categoria.tupled, Categoria.unapply)
   }
 
-  val categoria = TableQuery[CategoriaMapa]
+  val categoriaTableQuery = TableQuery[CategoriaMapa]
 }

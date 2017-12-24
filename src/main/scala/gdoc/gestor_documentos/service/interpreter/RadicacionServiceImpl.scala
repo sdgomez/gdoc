@@ -10,6 +10,8 @@ trait RadicacionServiceImpl extends RadicacionService[Interno[DestinatarioGestio
     // pool de conexiones
     // encriptar las contraseñas
     // falta la parte del repository
+    // falta logback
+    // el execution context
     // falta los servicios rest
     // falta las pruebas unitarias
     Future.successful(Interno(

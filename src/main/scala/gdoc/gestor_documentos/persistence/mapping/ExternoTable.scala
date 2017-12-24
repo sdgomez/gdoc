@@ -9,14 +9,16 @@ object ExternoTable extends JdbcProfile{
     def id = column[Option[Long]]("ID", O.PrimaryKey)
 
     def categoriaId = column[Option[Long]]("ID_CATEGORIA")
+    def tipoRemitente = column[String]("TIPO_REMITENTE")
     def remitenteId = column[Option[Long]]("ID_REMITENTE")
+    def tipoDestinatario = column[String]("TIPO_DESTINATARIO")
     def destinatarioId = column[Option[Long]]("ID_DESTINATARIO")
     def comentario = column[String]("COMENTARIO")
 
-    def * = (id, categoriaId, remitenteId, destinatarioId, comentario) <> (ExternoDTO.tupled, ExternoDTO.unapply)
+    def * = (id, categoriaId, tipoRemitente, remitenteId, tipoDestinatario, destinatarioId, comentario) <> (ExternoDTO.tupled, ExternoDTO.unapply)
 
-    def categoriaFK = foreignKey("GDOC_EXTERNO_FK1", categoriaId, CategoriaTable.categoria)(_.id)
+    def categoriaFK = foreignKey("GDOC_EXTERNO_FK1", categoriaId, CategoriaTable.categoriaTableQuery)(_.id)
   }
 
-  val externo = TableQuery[ExternoMapa]
+  val externoTableQuery = TableQuery[ExternoMapa]
 }

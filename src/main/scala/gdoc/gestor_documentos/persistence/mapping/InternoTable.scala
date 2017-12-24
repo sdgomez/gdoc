@@ -9,15 +9,16 @@ object InternoTable extends JdbcProfile{
 
     def categoriaId = column[Option[Long]]("ID_CATEGORIA")
     def remitenteId = column[Option[Long]]("ID_REMITENTE")
+    def tipoDestinatario = column[String]("TIPO_DESTINATARIO")
     def destinatarioId = column[Option[Long]]("ID_DESTINATARIO")
     def comentario = column[String]("COMENTARIO")
 
-    def * = (id, categoriaId, remitenteId, destinatarioId, comentario) <> (InternoDTO.tupled, InternoDTO.unapply)
+    def * = (id, categoriaId, remitenteId, tipoDestinatario, destinatarioId, comentario) <> (InternoDTO.tupled, InternoDTO.unapply)
 
-    def categoriaFK = foreignKey("GDOC_INTERNO_FK1", categoriaId, CategoriaTable.categoria)(_.id)
-    def personaNaturalFK = foreignKey("GDOC_INTERNO_FK2", remitenteId, PersonaNaturalTable.personaNatural)(_.id)
+    def categoriaFK = foreignKey("GDOC_INTERNO_FK1", categoriaId, CategoriaTable.categoriaTableQuery)(_.id)
+    def personaNaturalFK = foreignKey("GDOC_INTERNO_FK2", remitenteId, PersonaNaturalTable.personaNaturalTableQuery)(_.id)
   }
 
-  val interno = TableQuery[InternoMapa]
+  val internoTableQuery = TableQuery[InternoMapa]
 }
 

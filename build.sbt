@@ -20,7 +20,8 @@ libraryDependencies ++= Seq(
   "com.zaxxer"            %     "HikariCP"           %     "2.6.3",
   "com.typesafe"          %     "config"             %     "1.3.1",
   "com.h2database"        %     "h2"                 %     "1.4.196"       %   Test,
-  "org.postgresql" % "postgresql" % "42.1.3"
+  "org.postgresql" % "postgresql" % "42.1.3",
+  "org.typelevel" %% "cats-core" % "1.0.0-RC2"
 )
 
 initialCommands := "import example._"

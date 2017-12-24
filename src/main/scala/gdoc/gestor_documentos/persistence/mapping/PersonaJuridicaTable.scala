@@ -16,5 +16,5 @@ object PersonaJuridicaTable extends JdbcProfile{
     def * = (id, nit, nombre) <> (PersonaJuridica.tupled, PersonaJuridica.unapply)
   }
 
-  val personaJuridica = TableQuery[PersonaJuridicaMapa]
+  val personaJuridicaTableQuery = TableQuery[PersonaJuridicaMapa]
 }
