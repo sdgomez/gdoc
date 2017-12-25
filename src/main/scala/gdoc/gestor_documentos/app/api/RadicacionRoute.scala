@@ -1,9 +1,10 @@
 package gdoc.gestor_documentos.app.api
 
 import akka.http.scaladsl.server.Directives._
-import gdoc.gestor_documentos.model.InternoDTO
+import gdoc.gestor_documentos.app.api.helpers.RadicacionMarshallers
+import gdoc.gestor_documentos.model.{ExternoDTO, InternoDTO, RecibidoDTO}
 
-trait RadicacionRoute {
+trait RadicacionRoute extends RadicacionMarshallers{
   val route =
     pathPrefix("radicarInterno") {
       post {
@@ -17,7 +18,7 @@ trait RadicacionRoute {
       }
     } ~ pathPrefix("radicarExterno") {
     post {
-      entity(as[InternoDTO]){
+      entity(as[ExternoDTO]){
         internoDTO =>
           complete(
             "ok"
@@ -27,7 +28,7 @@ trait RadicacionRoute {
     }
   } ~ pathPrefix("radicarRecibido") {
     post {
-      entity(as[InternoDTO]){
+      entity(as[RecibidoDTO]){
         internoDTO =>
           complete(
             "ok"
