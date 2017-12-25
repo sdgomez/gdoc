@@ -1,10 +1,10 @@
 package gdoc.gestor_documentos.service
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
-trait RadicacionService[A,B,C] {
-  def radicarInterno(interno:A):Future[A]
-  def radicarExterno(externo:B):Future[B]
-  def radicarRecibido(recibido:C):Future[C]
+trait RadicacionService[A,B,C,D,E,F] {
+  def radicarInterno(interno:A)(implicit ec:ExecutionContext):Future[Option[B]]
+  def radicarExterno(externo:C)(implicit ec:ExecutionContext):Future[Option[D]]
+  def radicarRecibido(recibido:E)(implicit ec:ExecutionContext):Future[Option[F]]
 }
 

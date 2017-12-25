@@ -1,12 +1,17 @@
 package gdoc.gestor_documentos.service.interpreter
 
 import gdoc.gestor_documentos.model._
+import gdoc.gestor_documentos.persistence.repository.interpreter.radicacionRepositoryImpl
 import gdoc.gestor_documentos.service.RadicacionService
+import gdoc.gestor_documentos.util.DataBaseProvider._
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
-trait RadicacionServiceImpl extends RadicacionService[Interno[DestinatarioGestion], Externo, Recibido[DestinatarioGestion, RemitenteGestion]]{
-  override def radicarInterno(interno: Interno[DestinatarioGestion]):Future[Interno[DestinatarioGestion]] = {
+trait RadicacionServiceImpl
+  extends RadicacionService[InternoDTO, Interno[DestinatarioGestion], ExternoDTO, Externo, RecibidoDTO, Recibido[DestinatarioGestion, RemitenteGestion]]{
+
+  override def radicarInterno(internoDTO: InternoDTO)
+     (implicit ec:ExecutionContext):Future[Option[Interno[DestinatarioGestion]]] = {
     // pool de conexiones
     // encriptar las contraseñas
     // falta la parte del repository
@@ -14,16 +19,12 @@ trait RadicacionServiceImpl extends RadicacionService[Interno[DestinatarioGestio
     // el execution context
     // falta los servicios rest
     // falta las pruebas unitarias
-    Future.successful(Interno(
-      None,
-      Categoria(None, "Memorando", ""),
-      PersonaNatural(None, "cedula", "123456789", "pepito perez"),
-      PersonaNatural(None, "cedula", "123456789", "pepito perez"),
-      None
-    ))
+    radicacionRepositoryImpl.radicarInterno(internoDTO).run(dataBaseConfiguration)
   }
 
-  override def radicarExterno(externo: Externo): Future[Externo] = ???
+  override def radicarExterno(externo: ExternoDTO)
+   (implicit ec:ExecutionContext): Future[Option[Externo]] = ???
 
-  override def radicarRecibido(recibido: Recibido[DestinatarioGestion, RemitenteGestion]): Future[Recibido[DestinatarioGestion, RemitenteGestion]] = ???
+  override def radicarRecibido(recibido: RecibidoDTO)
+    (implicit ec:ExecutionContext): Future[Option[Recibido[DestinatarioGestion, RemitenteGestion]]] = ???
 }
