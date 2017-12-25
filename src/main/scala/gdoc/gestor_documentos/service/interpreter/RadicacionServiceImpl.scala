@@ -12,12 +12,6 @@ trait RadicacionServiceImpl
 
   override def radicarInterno(internoDTO: InternoDTO)
      (implicit ec:ExecutionContext):Future[Option[Interno[DestinatarioGestion]]] = {
-    // pool de conexiones
-    // encriptar las contraseñas
-    // falta logback
-    // el execution context
-    // falta los servicios rest
-    // falta las pruebas unitarias
     radicacionRepositoryImpl.radicarInterno(internoDTO).run(dataBaseConfiguration)
   }
 
@@ -29,3 +23,16 @@ trait RadicacionServiceImpl
     (implicit ec:ExecutionContext): Future[Option[Recibido[DestinatarioGestion, RemitenteGestion]]] =
     radicacionRepositoryImpl.radicarRecibido(recibido).run(dataBaseConfiguration)
 }
+
+object radicacionServiceImpl extends RadicacionServiceImpl
+
+/*
+* TODO
+* pool de conexiones
+* encriptar las contraseñas
+* falta logback
+* el execution context
+* falta los servicios rest
+* falta las pruebas unitarias
+*
+ */
