@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e3c2ce3-3321-4ec1-8814-284786ade35b" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/RadicacionRepository.scala" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/Repository.scala" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/RadicacionRepositoryImpl.scala" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/sbt__org_scala_lang_scala_library_2_11_8_jar.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/sbt__org_scala_lang_scala_reflect_2_11_7_jar.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/scalabestpractices.iml" afterPath="$PROJECT_DIR$/.idea/modules/scalabestpractices.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CREATE.sql" afterPath="$PROJECT_DIR$/CREATE.sql" />
-      <change beforePath="$PROJECT_DIR$/build.sbt" afterPath="$PROJECT_DIR$/build.sbt" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/model/BDConfiguration.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/model/BDConfiguration.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/model/Documento.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/model/Documento.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/CategoriaTable.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/CategoriaTable.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/DependenciaTable.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/DependenciaTable.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/ExternoTable.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/ExternoTable.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/InternoTable.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/InternoTable.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/PersonaJuridicaTable.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/PersonaJuridicaTable.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/PersonaNaturalTable.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/PersonaNaturalTable.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/RecibidoTable.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/RecibidoTable.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/RutaTable.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/RutaTable.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/service/interpreter/RadicacionServiceImpl.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/service/interpreter/RadicacionServiceImpl.scala" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/helpers/RadicacionInternoHelper.scala" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/RadicacionRepositoryImpl.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/RadicacionRepositoryImpl.scala" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/project/project/target/" />
@@ -84,10 +66,22 @@
       <file leaf-file-name="RadicacionRepositoryImpl.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/RadicacionRepositoryImpl.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+            <state relative-caret-position="281">
+              <caret line="29" column="3" lean-forward="true" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
               <folding>
                 <element signature="e#67#90#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RadicacionInternoHelper.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/helpers/RadicacionInternoHelper.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+              <folding>
+                <element signature="e#75#170#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,11 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RadicacionRepository.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RadicacionRepository.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/RadicacionRepository.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="7" column="60" lean-forward="false" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
+              <caret line="7" column="62" lean-forward="false" selection-start-line="7" selection-start-column="62" selection-end-line="7" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -222,8 +216,9 @@
         <option value="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/RutaTable.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/PersonaNaturalTable.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/mapping/DependenciaTable.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/RadicacionRepositoryImpl.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/RadicacionRepository.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/RadicacionRepositoryImpl.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/helpers/RadicacionInternoHelper.scala" />
       </list>
     </option>
   </component>
@@ -354,6 +349,18 @@
               <item name="persistence" type="462c0819:PsiDirectoryNode" />
               <item name="repository" type="462c0819:PsiDirectoryNode" />
               <item name="interpreter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bestPractices" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScalaBestPractices" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="gestor_documentos" type="462c0819:PsiDirectoryNode" />
+              <item name="persistence" type="462c0819:PsiDirectoryNode" />
+              <item name="repository" type="462c0819:PsiDirectoryNode" />
+              <item name="interpreter" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bestPractices" type="b2602c69:ProjectViewProjectNode" />
@@ -865,19 +872,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/model/Persona.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/model/Documento.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -1259,21 +1258,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/RadicacionRepository.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="62" lean-forward="false" selection-start-line="7" selection-start-column="62" selection-end-line="7" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/RadicacionRepositoryImpl.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+        <state relative-caret-position="281">
+          <caret line="29" column="3" lean-forward="true" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
           <folding>
             <element signature="e#67#90#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/RadicacionRepository.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/helpers/RadicacionInternoHelper.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="60" lean-forward="false" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
-          <folding />
+        <state relative-caret-position="255">
+          <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding>
+            <element signature="e#75#170#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
