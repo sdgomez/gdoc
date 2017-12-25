@@ -1,6 +1,6 @@
 package gdoc.gestor_documentos.persistence.repository.interpreter.helpers
 
-import gdoc.gestor_documentos.model.{BDConfiguration, DestinatarioGestion, Interno, InternoDTO}
+import gdoc.gestor_documentos.model._
 import gdoc.gestor_documentos.persistence.mapping.CategoriaTable.categoriaTableQuery
 import gdoc.gestor_documentos.persistence.mapping.DependenciaTable.dependenciaTableQuery
 import gdoc.gestor_documentos.persistence.mapping.InternoTable.internoTableQuery
@@ -11,21 +11,33 @@ import scala.concurrent.{ExecutionContext, Future}
 
 trait RadicacionInternoHelper {
 
-  private[interpreter] def getInterno(futureInternoDTO: Future[InternoDTO], dbConfiguration:BDConfiguration)
+  private[interpreter] def getInterno(internoDTO: InternoDTO, dbConfiguration:BDConfiguration)
     (implicit ec: ExecutionContext): Future[Option[Interno[DestinatarioGestion]]] = {
 
-    futureInternoDTO.flatMap{
-      internoDto =>
-        internoDto.tipoDestinatario match {
+    internoDTO.tipoDestinatario match {
           case "GDOC_DEPENDENCIA" =>
-            queryWithDependencia(internoDto, dbConfiguration)
+            queryWithDependencia(internoDTO, dbConfiguration)
 
           case "GDOC_PERSONA_NATURAL" =>
-            queryWithPersonaNatural(internoDto, dbConfiguration)
+            queryWithPersonaNatural(internoDTO, dbConfiguration)
 
           case "GDOC_RUTA" =>
-            queryWithRuta(internoDto, dbConfiguration)
+            queryWithRuta(internoDTO, dbConfiguration)
         }
+  }
+
+  private[interpreter] def existsDestinatarioInterno(tipoDestinatario:String, destinatarioId:Option[Long], dbConfiguration:BDConfiguration)
+   (implicit ec: ExecutionContext): Future[Boolean] = {
+    import dbConfiguration.profile.api._
+    tipoDestinatario match {
+      case "GDOC_DEPENDENCIA" =>
+        dbConfiguration.db.run(dependenciaTableQuery.filter(_.id === destinatarioId).exists.result)
+
+      case "GDOC_PERSONA_NATURAL" =>
+        dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === destinatarioId).exists.result)
+
+      case "GDOC_RUTA" =>
+        dbConfiguration.db.run(rutaTableQuery.filter(_.id === destinatarioId).exists.result)
     }
   }
 

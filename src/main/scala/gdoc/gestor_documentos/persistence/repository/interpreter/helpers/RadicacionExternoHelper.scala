@@ -10,11 +10,11 @@ import scala.concurrent.{ExecutionContext, Future}
 
 trait RadicacionExternoHelper {
 
-  private[interpreter] def getExterno(futureExternoDTO: Future[ExternoDTO], dbConfiguration:BDConfiguration)
+  private[interpreter] def getExterno(externoDTO: ExternoDTO, dbConfiguration:BDConfiguration)
     (implicit ec: ExecutionContext): Future[Option[Externo]] = {
 
-    futureExternoDTO.flatMap{
-      externoDTO =>
+    /*futureExternoDTO.map{
+      externoDTO => */
         externoDTO.tipoDestinatario match {
           case "GDOC_PERSONA_JURIDICA" =>
             externoDTO.tipoRemitente match {
@@ -29,6 +29,34 @@ trait RadicacionExternoHelper {
             }
 
         }
+    //}
+  }
+
+  private[interpreter] def existsDestinatarioExterno(
+      tipoDestinatario:String, destinatarioId:Option[Long], dbConfiguration:BDConfiguration)
+      (implicit ec: ExecutionContext): Future[Boolean] = {
+
+        import dbConfiguration.profile.api._
+        tipoDestinatario match {
+          case "GDOC_PERSONA_NATURAL" =>
+            dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === destinatarioId).exists.result)
+
+          case "GDOC_PERSONA_JURIDICA" =>
+            dbConfiguration.db.run(personaJuridicaTableQuery.filter(_.id === destinatarioId).exists.result)
+        }
+  }
+
+  private[interpreter] def existsRemitenteExterno(
+    tipoRemitente:String, remitenteId:Option[Long], dbConfiguration:BDConfiguration)
+    (implicit ec: ExecutionContext): Future[Boolean] = {
+
+    import dbConfiguration.profile.api._
+    tipoRemitente match {
+      case "GDOC_PERSONA_NATURAL" =>
+        dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === remitenteId).exists.result)
+
+      case "GDOC_PERSONA_JURIDICA" =>
+        dbConfiguration.db.run(personaJuridicaTableQuery.filter(_.id === remitenteId).exists.result)
     }
   }
 

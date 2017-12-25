@@ -14,7 +14,6 @@ trait RadicacionServiceImpl
      (implicit ec:ExecutionContext):Future[Option[Interno[DestinatarioGestion]]] = {
     // pool de conexiones
     // encriptar las contraseñas
-    // falta la parte del repository
     // falta logback
     // el execution context
     // falta los servicios rest
@@ -23,8 +22,10 @@ trait RadicacionServiceImpl
   }
 
   override def radicarExterno(externo: ExternoDTO)
-   (implicit ec:ExecutionContext): Future[Option[Externo]] = ???
+   (implicit ec:ExecutionContext): Future[Option[Externo]] =
+    radicacionRepositoryImpl.radicarExterno(externo).run(dataBaseConfiguration)
 
   override def radicarRecibido(recibido: RecibidoDTO)
-    (implicit ec:ExecutionContext): Future[Option[Recibido[DestinatarioGestion, RemitenteGestion]]] = ???
+    (implicit ec:ExecutionContext): Future[Option[Recibido[DestinatarioGestion, RemitenteGestion]]] =
+    radicacionRepositoryImpl.radicarRecibido(recibido).run(dataBaseConfiguration)
 }
