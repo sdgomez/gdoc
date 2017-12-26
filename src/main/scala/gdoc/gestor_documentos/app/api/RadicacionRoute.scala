@@ -6,9 +6,12 @@ import akka.http.scaladsl.server.Directives.{entity, _}
 import gdoc.gestor_documentos.app.api.helpers.RadicacionMarshallers
 import gdoc.gestor_documentos.model._
 import play.api.libs.json.{JsValue, Json}
+import scala.concurrent.ExecutionContext.Implicits.global
 
 trait RadicacionRoute extends RadicacionMarshallers with RadicacionService{
   import akka.http.scaladsl.model.StatusCodes._
+
+  // TODO crear los marshaller para los response
 
   val internoRoute = pathPrefix("radicarInterno") {
     post {
@@ -29,7 +32,7 @@ trait RadicacionRoute extends RadicacionMarshallers with RadicacionService{
     }
   }
 
-  val externoRoute =
+  /* val externoRoute =
     pathPrefix("radicarExterno") {
       post {
         entity(as[ExternoDTO]){
@@ -68,7 +71,7 @@ trait RadicacionRoute extends RadicacionMarshallers with RadicacionService{
           }
 
         }
-      }
+      }*/
 
-  val route = internoRoute ~ externoRoute ~ recibidoRoute
+  val route = internoRoute /* ~ externoRoute ~ recibidoRoute */
 }

@@ -7,12 +7,15 @@ import gdoc.gestor_documentos.app.api.RadicacionRoute
 
 import scala.io.StdIn
 
-object WebServer extends App with RadicacionRoute{
-
+object ServerConf{
     implicit val system = ActorSystem("my-system")
-    implicit val materializer = ActorMaterializer()
-    // needed for the future flatMap/onComplete in the end
     implicit val executionContext = system.dispatcher
+}
+
+object WebServer extends App with RadicacionRoute{
+    import gdoc.gestor_documentos.app.ServerConf._
+
+    implicit val materializer = ActorMaterializer()
 
     val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
 
