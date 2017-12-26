@@ -52,6 +52,10 @@ trait RadicacionMarshallers {
         "comentario" -> interno.comentario
       )
     }
+
+    override def transform(transformer: JsValue => JsValue): Writes[Interno[DestinatarioGestion]] = super.transform(transformer)
+
+    override def transform(transformer: Writes[JsValue]): Writes[Interno[DestinatarioGestion]] = super.transform(transformer)
   }
 
   implicit val internoDtoUnmarshaller: FromEntityUnmarshaller[InternoDTO] = {
