@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e3c2ce3-3321-4ec1-8814-284786ade35b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/model/Documento.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/model/Documento.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/TestDB.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/TestDB.scala" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/helpers/RadicacionRecibidoHelper.scala" afterPath="$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/helpers/RadicacionRecibidoHelper.scala" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -93,8 +90,8 @@
       <file leaf-file-name="RadicacionRecibidoHelper.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/helpers/RadicacionRecibidoHelper.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="278" column="0" lean-forward="true" selection-start-line="278" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -1181,8 +1178,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/gdoc/gestor_documentos/persistence/repository/interpreter/helpers/RadicacionRecibidoHelper.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="278" column="0" lean-forward="true" selection-start-line="278" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
           <folding />
         </state>
       </provider>
