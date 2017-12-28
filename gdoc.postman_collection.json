@@ -1,0 +1,104 @@
+{
+	"id": "784e4b20-9cb9-f73a-00e7-9689a54fd6d1",
+	"name": "gdoc",
+	"description": "",
+	"order": [
+		"87191745-6faf-8eae-1fb8-6b9982f32b17",
+		"de7fc9ed-1413-6f95-054e-36cb576cd152",
+		"e95000ce-ca4d-bf4f-97c1-b913e71d0b42"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1514381140700,
+	"owner": "1480880",
+	"public": false,
+	"requests": [
+		{
+			"id": "87191745-6faf-8eae-1fb8-6b9982f32b17",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/radicarInterno",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1514441651021,
+			"name": "Radicar Interno",
+			"description": "",
+			"collectionId": "784e4b20-9cb9-f73a-00e7-9689a54fd6d1",
+			"responses": [],
+			"rawModeData": "{\n\t\"categoriaId\":1,\n\t\"remitenteId\":1,\n\t\"tipoDestinatario\":\"GDOC_DEPENDENCIA\",\n\t\"destinatarioId\":1,\n\t\"comentario\":\"memorando\"\n}"
+		},
+		{
+			"id": "de7fc9ed-1413-6f95-054e-36cb576cd152",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/radicarExterno",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1514442076898,
+			"name": "Radicar Externo",
+			"description": "",
+			"collectionId": "784e4b20-9cb9-f73a-00e7-9689a54fd6d1",
+			"responses": [],
+			"rawModeData": "{\n\t\"categoriaId\":4,\n\t\"tipoRemitente\":\"GDOC_PERSONA_JURIDICA\",\n\t\"remitenteId\":1,\n\t\"tipoDestinatario\":\"GDOC_PERSONA_NATURAL\",\n\t\"destinatarioId\":1,\n\t\"comentario\":\"memorando\"\n}"
+		},
+		{
+			"id": "e95000ce-ca4d-bf4f-97c1-b913e71d0b42",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/radicarRecibido",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1514443444437,
+			"name": "Radicar Recibido",
+			"description": "",
+			"collectionId": "784e4b20-9cb9-f73a-00e7-9689a54fd6d1",
+			"responses": [],
+			"rawModeData": "{\n\t\"categoriaId\":2,\n\t\"tipoRemitente\":\"GDOC_DEPENDENCIA\",\n\t\"remitenteId\":1,\n\t\"tipoDestinatario\":\"GDOC_RUTA\",\n\t\"destinatarioId\":1,\n\t\"comentario\":\"PQR\"\n}"
+		}
+	]
+}

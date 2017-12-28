@@ -7,9 +7,9 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
-object TestDB extends App with TestConsulta{
+/* object TestDB extends App with TestConsulta{
   query()
-}
+} */
 
 sealed trait TestConsulta {
   import gdoc.gestor_documentos.util.DataBaseProvider._

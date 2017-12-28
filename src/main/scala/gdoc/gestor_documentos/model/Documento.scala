@@ -31,7 +31,7 @@ final case class Externo
 ) extends Documento
 
 final case class ExternoDTO(
-   id:Option[Long],
+   id:Option[Long] = None,
    categoriaId:Option[Long],
    tipoRemitente:String,
    remitenteId:Option[Long],
@@ -50,7 +50,7 @@ final case class Recibido[A<:DestinatarioGestion, B<:RemitenteGestion]
 ) extends Documento
 
 final case class RecibidoDTO(
-  id:Option[Long],
+  id:Option[Long] = None,
   categoriaId:Option[Long],
   tipoRemitente:String,
   remitenteId:Option[Long],

@@ -13,7 +13,8 @@ trait RadicacionRecibidoHelper {
 
   private[interpreter] def getRecibido(recibidoDTO: RecibidoDTO, dbConfiguration:BDConfiguration)
     (implicit ec: ExecutionContext): Future[Option[Recibido[DestinatarioGestion, RemitenteGestion]]] = {
-
+    println("tipo de destinatario -------------------------> "+recibidoDTO.tipoDestinatario)
+    println("tipo de remitente -------------------------> "+recibidoDTO.tipoRemitente)
     recibidoDTO.tipoDestinatario match {
           case "GDOC_DEPENDENCIA" =>
             recibidoDTO.tipoRemitente match {
@@ -28,6 +29,7 @@ trait RadicacionRecibidoHelper {
             }
 
           case "GDOC_RUTA" =>
+            println("entramos a ruta")
             recibidoDTO.tipoRemitente match {
               case "GDOC_PERSONA_NATURAL"   => getRcWithDestRtRemPn(recibidoDTO, dbConfiguration)
               case "GDOC_DEPENDENCIA"       => getRcWithDestRtRemDp(recibidoDTO, dbConfiguration)
@@ -45,10 +47,10 @@ trait RadicacionRecibidoHelper {
       case "GDOC_PERSONA_NATURAL" =>
         dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === destinatarioId).exists.result)
 
-      case "GDOC_PERSONA_RUTA" =>
+      case "GDOC_RUTA" =>
         dbConfiguration.db.run(rutaTableQuery.filter(_.id === destinatarioId).exists.result)
 
-      case "GDOC_PERSONA_DEPENDENCIA" =>
+      case "GDOC_DEPENDENCIA" =>
         dbConfiguration.db.run(dependenciaTableQuery.filter(_.id === destinatarioId).exists.result)
     }
   }
@@ -59,7 +61,7 @@ trait RadicacionRecibidoHelper {
 
     import dbConfiguration.profile.api._
     tipoRemitente match {
-      case "GDOC_PERSONA_DEPENDENCIA" =>
+      case "GDOC_DEPENDENCIA" =>
         dbConfiguration.db.run(dependenciaTableQuery.filter(_.id === remitenteId).exists.result)
 
       case "GDOC_PERSONA_NATURAL" =>
