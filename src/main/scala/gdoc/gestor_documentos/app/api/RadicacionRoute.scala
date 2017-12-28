@@ -11,8 +11,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 trait RadicacionRoute extends RadicacionMarshallers with RadicacionService{
   import akka.http.scaladsl.model.StatusCodes._
 
-  // TODO crear los marshaller para los response
-
   val internoRoute = pathPrefix("radicarInterno") {
     post {
       entity(as[InternoDTO]){
@@ -32,7 +30,7 @@ trait RadicacionRoute extends RadicacionMarshallers with RadicacionService{
     }
   }
 
-  /* val externoRoute =
+  val externoRoute =
     pathPrefix("radicarExterno") {
       post {
         entity(as[ExternoDTO]){
@@ -71,7 +69,7 @@ trait RadicacionRoute extends RadicacionMarshallers with RadicacionService{
           }
 
         }
-      }*/
+      }
 
-  val route = internoRoute /* ~ externoRoute ~ recibidoRoute */
+  val route = internoRoute ~ externoRoute ~ recibidoRoute
 }

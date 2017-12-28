@@ -8,7 +8,6 @@ trait RadicacionMarshallers {
  implicit val internoDtoMarshaller = Json.format[InternoDTO]
  implicit val externoDtoMarshaller = Json.format[ExternoDTO]
  implicit val recibidoDtoMarshaller = Json.format[RecibidoDTO]
- implicit val personaJuridicaMarshaller = Json.format[PersonaJuridica]
  implicit val categoriaMarshaller = Json.format[Categoria]
 
   implicit val writeDependencia: Writes[Dependencia] = (
@@ -24,11 +23,16 @@ trait RadicacionMarshallers {
       (JsPath \ "nombres").write[String]
     )(unlift(PersonaNatural.unapply))
 
+  implicit val writePersonaJuridica: Writes[PersonaJuridica] = (
+    (JsPath \ "id").writeNullable[Long] and
+      (JsPath \ "nit").write[String] and
+      (JsPath \ "nombre").write[String]
+    )(unlift(PersonaJuridica.unapply))
+
   implicit val writeRuta: Writes[Ruta] = (
     (JsPath \ "id").writeNullable[Long] and
       (JsPath \ "descripcion").write[String]
     )(unlift(Ruta.unapply))
-
 
   implicit val destinatarioGestionWrites: Writes[DestinatarioGestion] = new Writes[DestinatarioGestion]{
     override def writes(o: DestinatarioGestion): JsValue = o match {
@@ -42,12 +46,34 @@ trait RadicacionMarshallers {
     override def transform(transformer: Writes[JsValue]): Writes[DestinatarioGestion] = super.transform(transformer)
   }
 
+  implicit val remitenteGestionWrites: Writes[RemitenteGestion] = new Writes[RemitenteGestion]{
+    override def writes(o: RemitenteGestion): JsValue = o match {
+      case s2: PersonaNatural => writePersonaNatural.writes(s2)
+      case s1: Dependencia => writeDependencia.writes(s1)
+    }
+
+    override def transform(transformer: JsValue => JsValue): Writes[RemitenteGestion] = super.transform(transformer)
+
+    override def transform(transformer: Writes[JsValue]): Writes[RemitenteGestion] = super.transform(transformer)
+  }
+
+  implicit val personaWrites: Writes[Persona] = new Writes[Persona]{
+    override def writes(o: Persona): JsValue = o match {
+      case s1: PersonaJuridica => writePersonaJuridica.writes(s1)
+      case s2: PersonaNatural => writePersonaNatural.writes(s2)
+    }
+
+    override def transform(transformer: JsValue => JsValue): Writes[Persona] = super.transform(transformer)
+
+    override def transform(transformer: Writes[JsValue]): Writes[Persona] = super.transform(transformer)
+  }
+
   implicit val implicitInterno1Writes = new Writes[Interno[DestinatarioGestion]] {
     def writes(interno: Interno[DestinatarioGestion]): JsValue = {
       Json.obj(
         "id" -> interno.id,
         "categoria" -> interno.categoria,
-        "remitente" -> Json.toJson(interno.remitente),
+        "remitente" -> personaWrites.writes(interno.remitente),
         "destinatario" -> Json.toJson(interno.destinatario),
         "comentario" -> interno.comentario
       )
@@ -56,6 +82,38 @@ trait RadicacionMarshallers {
     override def transform(transformer: JsValue => JsValue): Writes[Interno[DestinatarioGestion]] = super.transform(transformer)
 
     override def transform(transformer: Writes[JsValue]): Writes[Interno[DestinatarioGestion]] = super.transform(transformer)
+  }
+
+  implicit val implicitRecibido1Writes = new Writes[Recibido[DestinatarioGestion, RemitenteGestion]] {
+    def writes(recibido: Recibido[DestinatarioGestion, RemitenteGestion]): JsValue = {
+      Json.obj(
+        "id" -> recibido.id,
+        "categoria" -> recibido.categoria,
+        "remitente" -> Json.toJson(recibido.remitente),
+        "destinatario" -> Json.toJson(recibido.destinatario),
+        "comentario" -> recibido.comentario
+      )
+    }
+
+    override def transform(transformer: JsValue => JsValue): Writes[Recibido[DestinatarioGestion, RemitenteGestion]] = super.transform(transformer)
+
+    override def transform(transformer: Writes[JsValue]): Writes[Recibido[DestinatarioGestion, RemitenteGestion]] = super.transform(transformer)
+  }
+
+  implicit val implicitExterno1Writes = new Writes[Externo] {
+    def writes(externo: Externo): JsValue = {
+      Json.obj(
+        "id" -> externo.id,
+        "categoria" -> externo.categoria,
+        "remitente" -> Json.toJson(externo.remitente),
+        "destinatario" -> Json.toJson(externo.destinatario),
+        "comentario" -> externo.comentario
+      )
+    }
+
+    override def transform(transformer: JsValue => JsValue): Writes[Externo] = super.transform(transformer)
+
+    override def transform(transformer: Writes[JsValue]): Writes[Externo] = super.transform(transformer)
   }
 
   implicit val internoDtoUnmarshaller: FromEntityUnmarshaller[InternoDTO] = {

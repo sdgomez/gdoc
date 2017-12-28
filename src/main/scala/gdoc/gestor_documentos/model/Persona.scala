@@ -1,7 +1,7 @@
 package gdoc.gestor_documentos.model
 
-trait DestinatarioGestion
-trait RemitenteGestion
+sealed trait DestinatarioGestion
+sealed trait RemitenteGestion
 
 sealed trait Persona
 final case class Dependencia(id:Option[Long], codigo:String, descripcion:String)

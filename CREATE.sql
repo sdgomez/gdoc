@@ -115,3 +115,29 @@ ALTER TABLE "GDOC_RECIBIDO" ADD COLUMN "TIPO_DESTINATARIO" varchar(30);
 ALTER TABLE "GDOC_EXTERNO" ADD COLUMN "TIPO_REMITENTE" varchar(30);
 
 ALTER TABLE "GDOC_RECIBIDO" ADD COLUMN "TIPO_REMITENTE" varchar(30);
+
+INSERT INTO public."GDOC_PERSONA_NATURAL"(
+            "TIPO_IDENTIFICACION", "IDENTIFICACION", "NOMBRES")
+    VALUES ('C.C', '1068904805', 'PEPITO PEREZ');
+
+
+{
+    "id": 1,
+    "categoria": {
+        "id": 1,
+        "nombre": "MEMORANDO",
+        "descripcion": "Documento interno para comunicar en forma breve asuntos de carácter administrativo a personas"
+    },
+    "remitente": {
+        "id": 1,
+        "tipoIdentificacion": "CC",
+        "identificacion": "1234567890",
+        "nombres": "PEPITO PEREZ"
+    },
+    "destinatario": {
+        "id": 1,
+        "codigo": "Recursos Humanos",
+        "descripcion": "Encargada de la gestión del personal"
+    },
+    "comentario": "memorando"
+}
