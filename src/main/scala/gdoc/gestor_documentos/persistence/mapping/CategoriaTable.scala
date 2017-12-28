@@ -7,7 +7,7 @@ object CategoriaTable extends JdbcProfile{
   import api._
 
   private[persistence] class CategoriaMapa(tag: Tag) extends Table[Categoria](tag, "GDOC_CATEGORIA") {
-    def id = column[Option[Long]]("ID", O.PrimaryKey)
+    def id = column[Option[Long]]("ID", O.PrimaryKey, O.AutoInc)
 
     def nombre = column[String]("NOMBRE")
 

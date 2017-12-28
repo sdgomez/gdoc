@@ -5,7 +5,7 @@ import slick.jdbc.JdbcProfile
 object InternoTable extends JdbcProfile{
   import api._
   private[persistence] class InternoMapa(tag: Tag) extends Table[InternoDTO](tag, "GDOC_INTERNO") {
-    def id = column[Option[Long]]("ID", O.PrimaryKey)
+    def id = column[Option[Long]]("ID", O.PrimaryKey, O.AutoInc)
 
     def categoriaId = column[Option[Long]]("ID_CATEGORIA")
     def remitenteId = column[Option[Long]]("ID_REMITENTE")

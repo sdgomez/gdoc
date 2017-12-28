@@ -7,7 +7,7 @@ object DependenciaTable extends JdbcProfile{
   import api._
 
   class DependenciaMapa(tag: Tag) extends Table[Dependencia](tag, "GDOC_DEPENDENCIA") with MapaTabla{
-    def id = column[Option[Long]]("ID", O.PrimaryKey)
+    def id = column[Option[Long]]("ID", O.PrimaryKey, O.AutoInc)
 
     def codigo = column[String]("CODIGO")
 

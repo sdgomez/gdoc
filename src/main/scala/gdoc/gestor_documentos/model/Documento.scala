@@ -13,7 +13,7 @@ final case class Interno[A<:DestinatarioGestion]
 ) extends Documento
 
 final case class InternoDTO(
-     id:Option[Long],
+     id:Option[Long] = None,
      categoriaId:Option[Long],
      remitenteId:Option[Long],
      tipoDestinatario:String,

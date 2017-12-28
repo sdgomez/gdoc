@@ -7,7 +7,7 @@ object PersonaJuridicaTable extends JdbcProfile{
   import api._
 
   private[persistence] class PersonaJuridicaMapa(tag: Tag) extends Table[PersonaJuridica](tag, "GDOC_PERSONA_JURIDICA") {
-    def id = column[Option[Long]]("ID", O.PrimaryKey)
+    def id = column[Option[Long]]("ID", O.PrimaryKey, O.AutoInc)
 
     def nit = column[String]("NIT")
 

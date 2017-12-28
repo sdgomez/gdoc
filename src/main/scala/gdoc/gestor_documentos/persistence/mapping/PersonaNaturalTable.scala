@@ -7,7 +7,7 @@ object PersonaNaturalTable extends JdbcProfile{
   import api._
 
   private[persistence] class PersonaNaturalMapa(tag: Tag) extends Table[PersonaNatural](tag, "GDOC_PERSONA_NATURAL") with MapaTabla{
-    def id = column[Option[Long]]("ID", O.PrimaryKey)
+    def id = column[Option[Long]]("ID", O.PrimaryKey, O.AutoInc)
 
     def tipoIdentificacion = column[String]("TIPO_IDENTIFICACION")
     def identificacion = column[String]("IDENTIFICACION")

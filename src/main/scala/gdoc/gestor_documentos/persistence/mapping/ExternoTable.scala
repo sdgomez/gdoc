@@ -6,7 +6,7 @@ import slick.jdbc.JdbcProfile
 object ExternoTable extends JdbcProfile{
   import api._
   private[persistence] class ExternoMapa(tag: Tag) extends Table[ExternoDTO](tag, "GDOC_EXTERNO") {
-    def id = column[Option[Long]]("ID", O.PrimaryKey)
+    def id = column[Option[Long]]("ID", O.PrimaryKey, O.AutoInc)
 
     def categoriaId = column[Option[Long]]("ID_CATEGORIA")
     def tipoRemitente = column[String]("TIPO_REMITENTE")

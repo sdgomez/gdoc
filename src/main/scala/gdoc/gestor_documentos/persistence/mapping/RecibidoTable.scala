@@ -7,7 +7,7 @@ import gdoc.gestor_documentos.model.RecibidoDTO
 object RecibidoTable extends JdbcProfile{
   import api._
   private[persistence] class RecibidoMapa(tag: Tag) extends Table[RecibidoDTO](tag, "GDOC_RECIBIDO") {
-    def id = column[Option[Long]]("ID", O.PrimaryKey)
+    def id = column[Option[Long]]("ID", O.PrimaryKey, O.AutoInc)
 
     def categoriaId = column[Option[Long]]("ID_CATEGORIA")
     def tipoRemitente = column[String]("TIPO_REMITENTE")
