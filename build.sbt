@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-json" % "2.5.7",
   "com.typesafe.akka" %% "akka-http" % "10.0.5",
   "com.typesafe.akka" %% "akka-http-testkit" % "10.0.5",
-  "org.scalatest" %% "scalatest" % "2.2.1" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
   "org.scalacheck" %% "scalacheck" % "1.11.5" % "test",
   "ch.qos.logback" % "logback-classic" % "1.1.6",
   "com.typesafe.slick"    %%    "slick"              %     "3.2.1",

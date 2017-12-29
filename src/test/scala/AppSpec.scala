@@ -1,4 +1,4 @@
-package example
+/*package example
 
 import org.scalatest.{Matchers, PropSpec}
 import org.scalatest.prop._
@@ -16,4 +16,4 @@ class CheckSpec
     }
   }
 
-}
+} */
