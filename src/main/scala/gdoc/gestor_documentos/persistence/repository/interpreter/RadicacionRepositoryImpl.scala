@@ -30,8 +30,11 @@ trait RadicacionRepositoryImpl
         i <- getInterno(internoDTO, dbConfiguration)
       } yield i
       internoRespuesta.recover{
-          case NoExisteDestinatario => Some(GdocError(mensaje = "El destinatario no existe en la base de datos"))
-          case NoExisteRemitente    => Some(GdocError(mensaje = "El remitente no existe en la base de datos"))
+          case NoExisteDestinatario => setError("El destinatario no existe en la base de datos")
+          case NoExisteRemitente    => setError("El remitente no existe en la base de datos")
+          case ex:Exception         =>
+            setError(s"Ha ocurrido un error al intentar registrar el documento. " +
+              s"Descripcion tecnica => ${ex.getMessage} tipoExcepción => ${ex.getClass} ")
       }
   }
 
@@ -52,8 +55,11 @@ trait RadicacionRepositoryImpl
       } yield externoR
 
       externoRespuesta.recover{
-        case NoExisteDestinatario => Some(GdocError(mensaje = "El destinatario no existe en la base de datos"))
-        case NoExisteRemitente    => Some(GdocError(mensaje = "El remitente no existe en la base de datos"))
+        case NoExisteDestinatario => setError("El destinatario no existe en la base de datos")
+        case NoExisteRemitente    => setError("El remitente no existe en la base de datos")
+        case ex:Exception         =>
+          setError(s"Ha ocurrido un error al intentar registrar el documento. " +
+            s"Descripcion tecnica => ${ex.getMessage} tipoExcepción => ${ex.getClass} ")
       }
   }
 
@@ -72,10 +78,18 @@ trait RadicacionRepositoryImpl
       } yield recibidoR
 
       recibidoRespuesta.recover{
-        case NoExisteDestinatario => Some(GdocError(mensaje = "El destinatario no existe en la base de datos"))
-        case NoExisteRemitente    => Some(GdocError(mensaje = "El remitente no existe en la base de datos"))
+        case NoExisteDestinatario => setError("El destinatario no existe en la base de datos")
+        case NoExisteRemitente    => setError("El remitente no existe en la base de datos")
+        case ex:Exception         =>
+          setError(s"Ha ocurrido un error al intentar registrar el documento. " +
+            s"Descripcion tecnica => ${ex.getMessage} tipoExcepción => ${ex.getClass}")
       }
   }
+
+  def setError(error: String):Option[GdocError] = Some{
+    GdocError(mensaje = error)
+  }
+
 }
 
 object radicacionRepositoryImpl extends RadicacionRepositoryImpl
