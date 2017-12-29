@@ -1,9 +1,9 @@
 package gdoc.gestor_documentos.model
 
-sealed trait DestinatarioGestion
-sealed trait RemitenteGestion
+sealed trait DestinatarioGestion extends Domain
+sealed trait RemitenteGestion extends Domain
 
-sealed trait Persona
+sealed trait Persona extends Domain
 final case class Dependencia(id:Option[Long], codigo:String, descripcion:String)
   extends DestinatarioGestion with RemitenteGestion
 

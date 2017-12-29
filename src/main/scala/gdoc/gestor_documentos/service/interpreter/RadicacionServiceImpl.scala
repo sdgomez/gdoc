@@ -8,19 +8,19 @@ import gdoc.gestor_documentos.util.DataBaseProvider._
 import scala.concurrent.{ExecutionContext, Future}
 
 trait RadicacionServiceImpl
-  extends RadicacionService[InternoDTO, Interno[DestinatarioGestion], ExternoDTO, Externo, RecibidoDTO, Recibido[DestinatarioGestion, RemitenteGestion]]{
+  extends RadicacionService[InternoDTO, ExternoDTO, RecibidoDTO, Documento]{
 
   override def radicarInterno(internoDTO: InternoDTO)
-     (implicit ec:ExecutionContext):Future[Option[Interno[DestinatarioGestion]]] = {
+     (implicit ec:ExecutionContext):Future[Option[Documento]] = {
     radicacionRepositoryImpl.radicarInterno(internoDTO).run(dataBaseConfiguration)
   }
 
   override def radicarExterno(externo: ExternoDTO)
-   (implicit ec:ExecutionContext): Future[Option[Externo]] =
+   (implicit ec:ExecutionContext): Future[Option[Documento]] =
     radicacionRepositoryImpl.radicarExterno(externo).run(dataBaseConfiguration)
 
   override def radicarRecibido(recibido: RecibidoDTO)
-    (implicit ec:ExecutionContext): Future[Option[Recibido[DestinatarioGestion, RemitenteGestion]]] =
+    (implicit ec:ExecutionContext): Future[Option[Documento]] =
     radicacionRepositoryImpl.radicarRecibido(recibido).run(dataBaseConfiguration)
 }
 

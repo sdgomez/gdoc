@@ -1,4 +1,4 @@
-name := "bestPractices"
+name := "GDOC"
 
 organization := "example"
 

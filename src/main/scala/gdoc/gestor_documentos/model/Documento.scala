@@ -1,7 +1,7 @@
 package gdoc.gestor_documentos.model
 
-
-sealed trait Documento
+trait Domain
+trait Documento extends Domain
 
 final case class Interno[A<:DestinatarioGestion]
 (

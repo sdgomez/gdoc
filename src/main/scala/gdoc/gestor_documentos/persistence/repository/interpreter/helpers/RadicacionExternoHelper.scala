@@ -1,6 +1,7 @@
 package gdoc.gestor_documentos.persistence.repository.interpreter.helpers
 
 import gdoc.gestor_documentos.model._
+import gdoc.gestor_documentos.model.exception.{NoExisteDestinatario, NoExisteRemitente}
 import gdoc.gestor_documentos.persistence.mapping.CategoriaTable.categoriaTableQuery
 import gdoc.gestor_documentos.persistence.mapping.ExternoTable._
 import gdoc.gestor_documentos.persistence.mapping.PersonaJuridicaTable._
@@ -12,9 +13,6 @@ trait RadicacionExternoHelper {
 
   private[interpreter] def getExterno(externoDTO: ExternoDTO, dbConfiguration:BDConfiguration)
     (implicit ec: ExecutionContext): Future[Option[Externo]] = {
-
-    /*futureExternoDTO.map{
-      externoDTO => */
         externoDTO.tipoDestinatario match {
           case "GDOC_PERSONA_JURIDICA" =>
             externoDTO.tipoRemitente match {
@@ -29,7 +27,6 @@ trait RadicacionExternoHelper {
             }
 
         }
-    //}
   }
 
   private[interpreter] def existsDestinatarioExterno(
@@ -37,13 +34,14 @@ trait RadicacionExternoHelper {
       (implicit ec: ExecutionContext): Future[Boolean] = {
 
         import dbConfiguration.profile.api._
-        tipoDestinatario match {
+        val futureExists: Future[Boolean] = tipoDestinatario match {
           case "GDOC_PERSONA_NATURAL" =>
             dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === destinatarioId).exists.result)
 
           case "GDOC_PERSONA_JURIDICA" =>
             dbConfiguration.db.run(personaJuridicaTableQuery.filter(_.id === destinatarioId).exists.result)
         }
+        futureExists.map(if(_) true else throw NoExisteDestinatario)
   }
 
   private[interpreter] def existsRemitenteExterno(
@@ -51,13 +49,14 @@ trait RadicacionExternoHelper {
     (implicit ec: ExecutionContext): Future[Boolean] = {
 
     import dbConfiguration.profile.api._
-    tipoRemitente match {
-      case "GDOC_PERSONA_NATURAL" =>
-        dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === remitenteId).exists.result)
+      val futureExists: Future[Boolean] = tipoRemitente match {
+        case "GDOC_PERSONA_NATURAL" =>
+          dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === remitenteId).exists.result)
 
-      case "GDOC_PERSONA_JURIDICA" =>
-        dbConfiguration.db.run(personaJuridicaTableQuery.filter(_.id === remitenteId).exists.result)
-    }
+        case "GDOC_PERSONA_JURIDICA" =>
+          dbConfiguration.db.run(personaJuridicaTableQuery.filter(_.id === remitenteId).exists.result)
+      }
+      futureExists.map(if(_) true else throw NoExisteRemitente)
   }
 
   private[interpreter] def getExternoCaseDestJuridico(externoDTO: ExternoDTO, dbConfiguration:BDConfiguration)

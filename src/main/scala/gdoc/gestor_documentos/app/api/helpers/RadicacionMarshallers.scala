@@ -1,5 +1,6 @@
 package gdoc.gestor_documentos.app.api.helpers
 import akka.http.scaladsl.unmarshalling.{Unmarshaller, _}
+import gdoc.gestor_documentos.model.exception.GdocError
 import gdoc.gestor_documentos.model.{DestinatarioGestion, _}
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
@@ -9,6 +10,12 @@ trait RadicacionMarshallers {
  implicit val externoDtoMarshaller = Json.format[ExternoDTO]
  implicit val recibidoDtoMarshaller = Json.format[RecibidoDTO]
  implicit val categoriaMarshaller = Json.format[Categoria]
+ //implicit val gdocErrorMarshaller = Json.format[GdocError]
+
+  implicit val writeError: Writes[GdocError] = (
+    (JsPath \ "codigo").write[Long] and
+    (JsPath \ "mensaje").write[String]
+    )(unlift(GdocError.unapply))
 
   implicit val writeDependencia: Writes[Dependencia] = (
     (JsPath \ "id").writeNullable[Long] and
@@ -66,6 +73,19 @@ trait RadicacionMarshallers {
     override def transform(transformer: JsValue => JsValue): Writes[Persona] = super.transform(transformer)
 
     override def transform(transformer: Writes[JsValue]): Writes[Persona] = super.transform(transformer)
+  }
+
+  implicit val documentoWrites: Writes[Documento] = new Writes[Documento]{
+    override def writes(o: Documento): JsValue = o match {
+      case s1: Interno[DestinatarioGestion] => implicitInterno1Writes.writes(s1)
+      case s2: Externo => implicitExterno1Writes.writes(s2)
+      case s3: Recibido[DestinatarioGestion, RemitenteGestion] => implicitRecibido1Writes.writes(s3)
+      case s4: GdocError => writeError.writes(s4)
+    }
+
+    override def transform(transformer: JsValue => JsValue): Writes[Documento] = super.transform(transformer)
+
+    override def transform(transformer: Writes[JsValue]): Writes[Documento] = super.transform(transformer)
   }
 
   implicit val implicitInterno1Writes = new Writes[Interno[DestinatarioGestion]] {

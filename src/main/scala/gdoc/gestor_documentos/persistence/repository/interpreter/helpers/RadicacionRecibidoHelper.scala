@@ -1,6 +1,7 @@
 package gdoc.gestor_documentos.persistence.repository.interpreter.helpers
 
 import gdoc.gestor_documentos.model._
+import gdoc.gestor_documentos.model.exception.{NoExisteDestinatario, NoExisteRemitente}
 import gdoc.gestor_documentos.persistence.mapping.CategoriaTable.categoriaTableQuery
 import gdoc.gestor_documentos.persistence.mapping.DependenciaTable._
 import gdoc.gestor_documentos.persistence.mapping.PersonaNaturalTable.personaNaturalTableQuery
@@ -40,7 +41,7 @@ trait RadicacionRecibidoHelper {
     (implicit ec: ExecutionContext): Future[Boolean] = {
 
     import dbConfiguration.profile.api._
-    tipoDestinatario match {
+    val futureExists: Future[Boolean] = tipoDestinatario match {
       case "GDOC_PERSONA_NATURAL" =>
         dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === destinatarioId).exists.result)
 
@@ -50,6 +51,7 @@ trait RadicacionRecibidoHelper {
       case "GDOC_DEPENDENCIA" =>
         dbConfiguration.db.run(dependenciaTableQuery.filter(_.id === destinatarioId).exists.result)
     }
+    futureExists.map(if(_) true else throw NoExisteDestinatario)
   }
 
   private[interpreter] def existsRemitenteRecibido(
@@ -57,13 +59,14 @@ trait RadicacionRecibidoHelper {
    (implicit ec: ExecutionContext): Future[Boolean] = {
 
     import dbConfiguration.profile.api._
-    tipoRemitente match {
+    val futureExists: Future[Boolean] = tipoRemitente match {
       case "GDOC_DEPENDENCIA" =>
         dbConfiguration.db.run(dependenciaTableQuery.filter(_.id === remitenteId).exists.result)
 
       case "GDOC_PERSONA_NATURAL" =>
         dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === remitenteId).exists.result)
     }
+    futureExists.map(if(_) true else throw NoExisteRemitente)
   }
 
   /*
