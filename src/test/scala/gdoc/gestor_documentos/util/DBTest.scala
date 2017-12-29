@@ -1,4 +1,4 @@
-package util
+package gdoc.gestor_documentos.util
 import gdoc.gestor_documentos.model._
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{BeforeAndAfterAll, FlatSpec}

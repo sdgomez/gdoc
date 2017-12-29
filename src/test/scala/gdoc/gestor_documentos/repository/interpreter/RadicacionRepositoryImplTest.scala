@@ -1,8 +1,8 @@
-package util.repository.interpreter
+package gdoc.gestor_documentos.repository.interpreter
 
 import gdoc.gestor_documentos.model.{Documento, ExternoDTO, InternoDTO, RecibidoDTO}
 import org.scalatest.{Matchers, RecoverMethods}
-import util.DBTest
+import gdoc.gestor_documentos.util.DBTest
 import gdoc.gestor_documentos.persistence.repository.interpreter.radicacionRepositoryImpl
 
 import scala.concurrent.ExecutionContext.Implicits.global
