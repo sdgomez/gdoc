@@ -1,13 +1,14 @@
 package gdoc.gestor_documentos.repository.interpreter
 
 import gdoc.gestor_documentos.model.{Documento, ExternoDTO, InternoDTO, RecibidoDTO}
-import org.scalatest.{Matchers, RecoverMethods}
-import gdoc.gestor_documentos.util.DBTest
 import gdoc.gestor_documentos.persistence.repository.interpreter.radicacionRepositoryImpl
+import gdoc.gestor_documentos.util.DBTest
+import org.scalatest.{Matchers, RecoverMethods}
+import scala.concurrent.duration._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
-trait RadicacionRepositoryImplTest extends DBTest with Matchers with RecoverMethods{
+class RadicacionRepositoryImplTest extends DBTest with Matchers with RecoverMethods{
 
   val internoDTO:InternoDTO = InternoDTO(
     id = Some(1),
@@ -40,25 +41,31 @@ trait RadicacionRepositoryImplTest extends DBTest with Matchers with RecoverMeth
 
   "RadicacionRepositoryImpl" should "Radicar un interno correctamente" in {
 
-    whenReady(radicacionRepositoryImpl.radicarInterno(internoDTO).run(dataBaseConfiguration)) {
+    whenReady(
+      radicacionRepositoryImpl.radicarInterno(internoDTO)
+        .run(dataBaseConfiguration), timeout(6 seconds), interval(500 millis)) {
       res =>
-        res shouldBe a [Documento]
+        res shouldBe a [Option[Documento]]
     }
   }
 
   "RadicacionRepositoryImpl" should "Radicar un externo correctamente" in {
 
-    whenReady(radicacionRepositoryImpl.radicarExterno(externoDTO).run(dataBaseConfiguration)) {
+    whenReady(
+      radicacionRepositoryImpl.radicarExterno(externoDTO)
+        .run(dataBaseConfiguration), timeout(6 seconds), interval(500 millis)) {
       res =>
-        res shouldBe a [Documento]
+        res shouldBe a [Option[Documento]]
     }
   }
 
   "RadicacionRepositoryImpl" should "Radicar un recibido correctamente" in {
 
-    whenReady(radicacionRepositoryImpl.radicarRecibido(recibidoDTO).run(dataBaseConfiguration)) {
+    whenReady(
+      radicacionRepositoryImpl.radicarRecibido(recibidoDTO)
+        .run(dataBaseConfiguration), timeout(6 seconds), interval(500 millis)) {
       res =>
-        res shouldBe a [Documento]
+        res shouldBe a [Option[Documento]]
     }
   }
 

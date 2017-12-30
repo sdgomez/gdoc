@@ -11,13 +11,17 @@ trait DBTest extends FlatSpec with BeforeAndAfterAll with ScalaFutures{
   private val db = Database.forConfig("gdoctest")
   private val profile = H2Profile
   val dataBaseConfiguration: BDConfiguration = BDConfiguration(profile, db)
-  DataBaseProviderTest
+  override def beforeAll():Unit = {
+    DataBaseProviderTest
+  }
+
   override def afterAll(): Unit = {
-    DataBaseProviderTest.truncateTable()
+    //DataBaseProviderTest.truncateTable()
   }
 }
 object DataBaseProviderTest extends DBTest{
 
+  import H2Profile.api._
   import gdoc.gestor_documentos.persistence.mapping.CategoriaTable._
   import gdoc.gestor_documentos.persistence.mapping.DependenciaTable._
   import gdoc.gestor_documentos.persistence.mapping.ExternoTable._
@@ -26,7 +30,6 @@ object DataBaseProviderTest extends DBTest{
   import gdoc.gestor_documentos.persistence.mapping.PersonaNaturalTable._
   import gdoc.gestor_documentos.persistence.mapping.RecibidoTable._
   import gdoc.gestor_documentos.persistence.mapping.RutaTable._
-  import dataBaseConfiguration.profile.api._
 
   def createTable() = {
     val setup = DBIO.seq(
@@ -39,21 +42,20 @@ object DataBaseProviderTest extends DBTest{
         ++ internoTableQuery.schema
         ++ externoTableQuery.schema
         ++ recibidoTableQuery.schema
-      )
-        .create
+      ).create
+
     )
-    Await.result(dataBaseConfiguration.db.run(setup), Duration.Inf)
-  }
 
-  def insert() = {
-
-    val setup = DBIO.seq(
+    val setup2 = DBIO.seq(
       dependenciaTableQuery += Dependencia(Some(1), codigo = "002", descripcion = "gerencia"),
       personaNaturalTableQuery += PersonaNatural(Some(1), "Cedula", "123", "juanito"),
       personaJuridicaTableQuery += PersonaJuridica(Some(1), "5455", "asociados s.a"),
       categoriaTableQuery += Categoria(Some(1), "categoria1", "esta es una categ")
     )
-    Await.result(dataBaseConfiguration.db.run(setup), Duration.Inf)
+
+    val s3 = setup andThen setup2
+
+    Await.result(dataBaseConfiguration.db.run(s3), Duration.Inf)
   }
 
   def truncateTable(): Unit = {
@@ -74,5 +76,4 @@ object DataBaseProviderTest extends DBTest{
   }
 
   createTable()
-  insert()
 }
