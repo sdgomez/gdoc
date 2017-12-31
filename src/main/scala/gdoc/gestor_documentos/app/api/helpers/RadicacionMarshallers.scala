@@ -14,7 +14,8 @@ trait RadicacionMarshallers {
 
   implicit val writeError: Writes[GdocError] = (
     (JsPath \ "codigo").write[Long] and
-    (JsPath \ "mensaje").write[String]
+    (JsPath \ "mensaje").write[String] and
+    (JsPath \ "mensajeTecnico").write[String]
     )(unlift(GdocError.unapply))
 
   implicit val writeDependencia: Writes[Dependencia] = (
