@@ -42,10 +42,10 @@ trait RadicacionRepositoryImpl
   def handlePSQLException(exception:PSQLException):Option[GdocError] = {
     exception.getSQLState match {
       case foreign_key_violation =>
-        if(exception.getMessage.contains("ID_REMITENTE")) {
+        if(exception.getMessage.contains(idRemitente)) {
           setError(remitenteNotFound,
             s"Descripcion tecnica => ${exception.getMessage} tipoExcepción => ${foreign_key_violation} ")
-        }else if(exception.getMessage.contains("ID_CATEGORIA")){
+        }else if(exception.getMessage.contains(idCategoria)){
           setError(categoriaNotFound,
             s"Descripcion tecnica => ${exception.getMessage} tipoExcepción => ${foreign_key_violation} ")
         }else{

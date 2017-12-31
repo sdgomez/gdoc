@@ -16,13 +16,13 @@ trait RadicacionInternoHelper {
     (implicit ec: ExecutionContext): Future[Option[Interno[DestinatarioGestion]]] = {
 
     internoDTO.tipoDestinatario match {
-          case "GDOC_DEPENDENCIA" =>
+          case dependenciaType =>
             queryWithDependencia(internoDTO, dbConfiguration)
 
-          case "GDOC_PERSONA_NATURAL" =>
+          case personaNaturalType =>
             queryWithPersonaNatural(internoDTO, dbConfiguration)
 
-          case "GDOC_RUTA" =>
+          case rutaType =>
             queryWithRuta(internoDTO, dbConfiguration)
         }
   }
@@ -31,13 +31,13 @@ trait RadicacionInternoHelper {
    (implicit ec: ExecutionContext): Future[Boolean] = {
     import dbConfiguration.profile.api._
     val futureExists: Future[Boolean] = tipoDestinatario match {
-      case "GDOC_DEPENDENCIA" =>
+      case dependenciaType =>
         dbConfiguration.db.run(dependenciaTableQuery.filter(_.id === destinatarioId).exists.result)
 
-      case "GDOC_PERSONA_NATURAL" =>
+      case personaNaturalType =>
         dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === destinatarioId).exists.result)
 
-      case "GDOC_RUTA" =>
+      case rutaType =>
         dbConfiguration.db.run(rutaTableQuery.filter(_.id === destinatarioId).exists.result)
     }
     futureExists.map(if(_) true else throw NoExisteDestinatario)

@@ -7,6 +7,7 @@ import gdoc.gestor_documentos.persistence.mapping.DependenciaTable._
 import gdoc.gestor_documentos.persistence.mapping.PersonaNaturalTable.personaNaturalTableQuery
 import gdoc.gestor_documentos.persistence.mapping.RecibidoTable._
 import gdoc.gestor_documentos.persistence.mapping.RutaTable._
+import gdoc.gestor_documentos.configuration.ApplicationConf._
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -15,22 +16,22 @@ trait RadicacionRecibidoHelper {
   private[interpreter] def getRecibido(recibidoDTO: RecibidoDTO, dbConfiguration:BDConfiguration)
     (implicit ec: ExecutionContext): Future[Option[Recibido[DestinatarioGestion, RemitenteGestion]]] = {
     recibidoDTO.tipoDestinatario match {
-          case "GDOC_DEPENDENCIA" =>
+          case dependenciaType =>
             recibidoDTO.tipoRemitente match {
-              case "GDOC_PERSONA_NATURAL" =>  getRcWithDestDpRemPn(recibidoDTO, dbConfiguration)
-              case "GDOC_DEPENDENCIA"     =>  getRcWithDestDpRemDp(recibidoDTO, dbConfiguration)
+              case personaNaturalType =>  getRcWithDestDpRemPn(recibidoDTO, dbConfiguration)
+              case dependenciaType     =>  getRcWithDestDpRemDp(recibidoDTO, dbConfiguration)
             }
 
-          case "GDOC_PERSONA_NATURAL" =>
+          case personaNaturalType =>
             recibidoDTO.tipoRemitente match {
-              case "GDOC_PERSONA_NATURAL"   => getRcWithDestPnRemPn(recibidoDTO, dbConfiguration)
-              case "GDOC_DEPENDENCIA"       => getRcWithDestPnRemDp(recibidoDTO, dbConfiguration)
+              case personaNaturalType   => getRcWithDestPnRemPn(recibidoDTO, dbConfiguration)
+              case dependenciaType       => getRcWithDestPnRemDp(recibidoDTO, dbConfiguration)
             }
 
-          case "GDOC_RUTA" =>
+          case rutaType =>
             recibidoDTO.tipoRemitente match {
-              case "GDOC_PERSONA_NATURAL"   => getRcWithDestRtRemPn(recibidoDTO, dbConfiguration)
-              case "GDOC_DEPENDENCIA"       => getRcWithDestRtRemDp(recibidoDTO, dbConfiguration)
+              case personaNaturalType   => getRcWithDestRtRemPn(recibidoDTO, dbConfiguration)
+              case dependenciaType       => getRcWithDestRtRemDp(recibidoDTO, dbConfiguration)
             }
 
         }
@@ -42,13 +43,13 @@ trait RadicacionRecibidoHelper {
 
     import dbConfiguration.profile.api._
     val futureExists: Future[Boolean] = tipoDestinatario match {
-      case "GDOC_PERSONA_NATURAL" =>
+      case personaNaturalType =>
         dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === destinatarioId).exists.result)
 
-      case "GDOC_RUTA" =>
+      case rutaType =>
         dbConfiguration.db.run(rutaTableQuery.filter(_.id === destinatarioId).exists.result)
 
-      case "GDOC_DEPENDENCIA" =>
+      case dependenciaType =>
         dbConfiguration.db.run(dependenciaTableQuery.filter(_.id === destinatarioId).exists.result)
     }
     futureExists.map(if(_) true else throw NoExisteDestinatario)
@@ -60,10 +61,10 @@ trait RadicacionRecibidoHelper {
 
     import dbConfiguration.profile.api._
     val futureExists: Future[Boolean] = tipoRemitente match {
-      case "GDOC_DEPENDENCIA" =>
+      case dependenciaType =>
         dbConfiguration.db.run(dependenciaTableQuery.filter(_.id === remitenteId).exists.result)
 
-      case "GDOC_PERSONA_NATURAL" =>
+      case personaNaturalType =>
         dbConfiguration.db.run(personaNaturalTableQuery.filter(_.id === remitenteId).exists.result)
     }
     futureExists.map(if(_) true else throw NoExisteRemitente)
