@@ -9,6 +9,7 @@ import gdoc.gestor_documentos.persistence.mapping.RecibidoTable._
 import gdoc.gestor_documentos.persistence.repository.RadicacionRepository
 import gdoc.gestor_documentos.persistence.repository.interpreter.helpers.{RadicacionExternoHelper, RadicacionInternoHelper, RadicacionRecibidoHelper}
 import org.postgresql.util.PSQLException
+import gdoc.gestor_documentos.configuration.ApplicationConf._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
@@ -30,11 +31,11 @@ trait RadicacionRepositoryImpl
         i <- getInterno(internoDTO, dbConfiguration)
       } yield i
       internoRespuesta.recover{
-          case NoExisteDestinatario   => setError(s"El destinatario no existe", "")
-          case e:PSQLException      => handlePSQLException(e)
-          case ex:Exception         =>
+          case NoExisteDestinatario   => setError(destinatarioNotFound)
+          case e:PSQLException        => handlePSQLException(e)
+          case ex:Exception           =>
             setError(s"Ha ocurrido un error al intentar registrar el documento. " +
-              s"Descripcion tecnica => ${ex.getMessage} tipoExcepción => ${ex.getCause} ", "")
+              s"Descripcion tecnica => ${ex.getMessage} tipoExcepción => ${ex.getCause} ")
       }
   }
 
@@ -42,10 +43,10 @@ trait RadicacionRepositoryImpl
     exception.getSQLState match {
       case foreign_key_violation =>
         if(exception.getMessage.contains("ID_REMITENTE")) {
-          setError(s"El remitente no existe. ",
+          setError(remitenteNotFound,
             s"Descripcion tecnica => ${exception.getMessage} tipoExcepción => ${foreign_key_violation} ")
         }else if(exception.getMessage.contains("ID_CATEGORIA")){
-          setError(s"La categoria no existe. ",
+          setError(categoriaNotFound,
             s"Descripcion tecnica => ${exception.getMessage} tipoExcepción => ${foreign_key_violation} ")
         }else{
           setError(s"Uno de los datos no es correcto. ",
@@ -64,8 +65,8 @@ trait RadicacionRepositoryImpl
 
       val externoRespuesta: Future[Option[Externo]] = for {
         existDestinatario <- existsDestinatarioExterno(externo.tipoDestinatario, externo.destinatarioId, dbConfiguration)
-        existRemitente <- existsRemitenteExterno(externo.tipoRemitente, externo.remitenteId, dbConfiguration)
-        futureExternoDTO <- dbConfiguration.db.run((externoTableQuery returning externoTableQuery.map(_.id)
+        existRemitente    <- existsRemitenteExterno(externo.tipoRemitente, externo.remitenteId, dbConfiguration)
+        futureExternoDTO  <- dbConfiguration.db.run((externoTableQuery returning externoTableQuery.map(_.id)
           into ((in,newId) => in.copy(id=newId))
           ) += externo)
         externoR <- getExterno(futureExternoDTO, dbConfiguration)
@@ -73,12 +74,12 @@ trait RadicacionRepositoryImpl
       } yield externoR
 
       externoRespuesta.recover{
-        case NoExisteDestinatario => setError(s"El destinatario no existe", "")
-        case NoExisteRemitente    => setError(s"El remitente no existe", "")
+        case NoExisteDestinatario => setError(destinatarioNotFound)
+        case NoExisteRemitente    => setError(remitenteNotFound)
         case e:PSQLException      => handlePSQLException(e)
         case ex:Exception         =>
           setError(s"Ha ocurrido un error al intentar registrar el documento. " +
-            s"Descripcion tecnica => ${ex.getMessage} tipoExcepción => ${ex.getClass} ", "")
+            s"Descripcion tecnica => ${ex.getMessage} tipoExcepción => ${ex.getClass} ")
       }
   }
 
@@ -97,16 +98,16 @@ trait RadicacionRepositoryImpl
       } yield recibidoR
 
       recibidoRespuesta.recover{
-        case NoExisteDestinatario => setError("El destinatario no existe en la base de datos", "")
-        case NoExisteRemitente    => setError("El remitente no existe en la base de datos", "")
+        case NoExisteDestinatario => setError(destinatarioNotFound)
+        case NoExisteRemitente    => setError(remitenteNotFound)
         case e:PSQLException      => handlePSQLException(e)
         case ex:Exception         =>
           setError(s"Ha ocurrido un error al intentar registrar el documento. " +
-            s"Descripcion tecnica => ${ex.getMessage} tipoExcepción => ${ex.getClass}", "")
+            s"Descripcion tecnica => ${ex.getMessage} tipoExcepción => ${ex.getClass}")
       }
   }
 
-  def setError(error: String, mensajeTecnico:String):Option[GdocError] = Some{
+  def setError(error: String, mensajeTecnico:String = ""):Option[GdocError] = Some{
     GdocError(mensaje = error, mensajeTecnico = mensajeTecnico)
   }
 
