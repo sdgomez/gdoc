@@ -32,8 +32,6 @@ object radicacionServiceImpl extends RadicacionServiceImpl
 * encriptar las contraseñas
 * falta logback
 * el execution context
-* falta los servicios rest
-* falta las pruebas unitarias
 * falta seguridad
 *
  */

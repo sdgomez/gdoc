@@ -24,4 +24,10 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % "1.0.0-RC2"
 )
 
+javaOptions in reStart += "-Xmx2g"
+
+mainClass in Compile := Some("gdoc.gestor_documentos.app.WebServer")
+
+mainClass in reStart := Some("gdoc.gestor_documentos.app.WebServer")
+
 initialCommands := "import example._"
