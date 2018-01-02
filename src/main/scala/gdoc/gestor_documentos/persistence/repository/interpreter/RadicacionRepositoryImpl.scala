@@ -1,6 +1,7 @@
 package gdoc.gestor_documentos.persistence.repository.interpreter
 
 import cats.data.Reader
+import com.typesafe.scalalogging.Logger
 import gdoc.gestor_documentos.model.exception.{GdocError, NoExisteDestinatario, NoExisteRemitente}
 import gdoc.gestor_documentos.model.{BDConfiguration, _}
 import gdoc.gestor_documentos.persistence.mapping.ExternoTable._
@@ -17,6 +18,8 @@ import scala.concurrent.{ExecutionContext, Future}
 trait RadicacionRepositoryImpl
   extends RadicacionRepository[BDConfiguration, InternoDTO, ExternoDTO, RecibidoDTO, Documento]
     with RadicacionInternoHelper with RadicacionExternoHelper with RadicacionRecibidoHelper{
+
+  val logger = Logger(classOf[RadicacionRepositoryImpl])
 
   override def radicarInterno(interno: InternoDTO)(implicit ec: ExecutionContext):
     Reader[BDConfiguration, Future[Option[Documento]]] = Reader{
@@ -107,8 +110,11 @@ trait RadicacionRepositoryImpl
       }
   }
 
-  def setError(error: String, mensajeTecnico:String = ""):Option[GdocError] = Some{
-    GdocError(mensaje = error, mensajeTecnico = mensajeTecnico)
+  def setError(error: String, mensajeTecnico:String = ""):Option[GdocError] = {
+    if (!mensajeTecnico.isEmpty) {
+      logger.error(mensajeTecnico)
+    }
+    Some(GdocError(mensaje = error, mensajeTecnico = mensajeTecnico))
   }
 
 }
