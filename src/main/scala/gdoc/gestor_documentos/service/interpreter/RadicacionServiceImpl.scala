@@ -30,8 +30,11 @@ object radicacionServiceImpl extends RadicacionServiceImpl
 * TODO
 * pool de conexiones
 * encriptar las contraseñas
-* falta logback
 * el execution context
 * falta seguridad
-*
+* A modo de aprendizaje meterle caché
+* Enriquecer los logs con la IP, identificador de transacción, el usuario
+* Meterle docker
+* Meterle jenkins
+* variables inyectadas en tiempo de despliegue
  */

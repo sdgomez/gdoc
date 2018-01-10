@@ -1,0 +1,2 @@
+20:52:48 ERROR RadicacionRepositoryImpl {gdoc.gestor_documentos.persistence.repository.interpreter.RadicacionRepositoryImpl$class setError} - GESTOR_DE_DOCUMENTOS - Descripcion tecnica => ERROR: column "TIPO_DESTINATARIO" of relation "GDOC_INTERNO" does not exist
+  Position: 59 tipoExcepción => 42703 

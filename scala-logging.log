@@ -1,6 +1,0 @@
-19:16:05 ERROR RadicacionRepositoryImpl {gdoc.gestor_documentos.persistence.repository.interpreter.RadicacionRepositoryImpl$class setError} - Descripcion tecnica => ERROR: insert or update on table "GDOC_INTERNO" violates foreign key constraint "GDOC_INTERNO_FK1"
-  Detail: Key (ID_CATEGORIA)=(10) is not present in table "GDOC_CATEGORIA". tipoExcepción => 23503 
-19:18:33 ERROR RadicacionRepositoryImpl {gdoc.gestor_documentos.persistence.repository.interpreter.RadicacionRepositoryImpl$class setError} - GESTOR_DE_DOCUMENTOS - Descripcion tecnica => ERROR: insert or update on table "GDOC_INTERNO" violates foreign key constraint "GDOC_INTERNO_FK1"
-  Detail: Key (ID_CATEGORIA)=(10) is not present in table "GDOC_CATEGORIA". tipoExcepción => 23503 
-19:19:46 ERROR RadicacionRepositoryImpl {gdoc.gestor_documentos.persistence.repository.interpreter.RadicacionRepositoryImpl$class setError} - GESTOR_DE_DOCUMENTOS - Descripcion tecnica => ERROR: insert or update on table "GDOC_INTERNO" violates foreign key constraint "GDOC_INTERNO_FK1"
-  Detail: Key (ID_CATEGORIA)=(10) is not present in table "GDOC_CATEGORIA". tipoExcepción => 23503 
