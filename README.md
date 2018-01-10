@@ -21,3 +21,20 @@ El remitente y destinatario de un EXTERNO puede ser una persona natural o juríd
 * [ScalaTest](http://www.scalatest.org/)
 * [ScalaCheck](http://www.scalacheck.org/)
 
+
+Comandos:
+
+sbt:
+* "reStart" para iniciar la aplicación
+
+* "test" para correr las pruebas
+
+* Para tirar las pruebas unitarias con el análisis de coberetura:
+"clean coverage test"
+
+* Para tirar las pruebas de integración con el análisis de coberetura:
+sbt clean coverage it:test
+
+* Para generar el reporte html de la cobertura, con anterioridad debe haber
+ejecutado los comandos anteriores:
+sbt coverageReport
