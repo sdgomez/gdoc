@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scalabestpractices.iml" filepath="$PROJECT_DIR$/.idea/modules/scalabestpractices.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scalabestpractices-build.iml" filepath="$PROJECT_DIR$/.idea/modules/scalabestpractices-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gdoc.iml" filepath="$PROJECT_DIR$/.idea/modules/gdoc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gdoc-build.iml" filepath="$PROJECT_DIR$/.idea/modules/gdoc-build.iml" />
     </modules>
   </component>
 </project>
